@@ -6,6 +6,7 @@ const allNotes = getActiveNotes()
 </script>
 
 <template>
+  <h2>Catatan Aktif</h2>
   <section class="notes-list">
     <article v-for="note in allNotes" class="note-item">
       <h3 class="note-item__title">
