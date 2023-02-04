@@ -1,12 +1,22 @@
 <script setup>
-import { reactive } from 'vue';
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { showFormattedDate } from '../utils';
-import { getNote } from '../utils/local-data'
+import { archiveNote, deleteNote, getNote } from '../utils/local-data'
 
 const route = useRoute()
+const router = useRouter()
 
 const note = getNote(route.params.id)
+
+function deleteNoteshandler (id) {
+  deleteNote(id)
+  router.push('/')
+}
+
+function archiveNotesHandler (id) {
+  archiveNote(id)
+  router.push('/')
+}
 </script>
 
 <template>
@@ -15,7 +25,7 @@ const note = getNote(route.params.id)
     <p class="detail-page__createdAt">{{ showFormattedDate(note.createdAt) }}</p>
     <div class="detail-page__body">{{ note.body }}</div>
     <div class="detail-page__action">
-      <button class="action" type="button" title="Arsipkan">
+      <button @click="archiveNotesHandler(note.id)" class="action" type="button" title="Arsipkan">
         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em"
           xmlns="http://www.w3.org/2000/svg">
           <path fill="none" d="M0 0h24v24H0V0z"></path>
@@ -24,7 +34,7 @@ const note = getNote(route.params.id)
           </path>
         </svg>
       </button>
-      <button class="action" type="button" title="Hapus">
+      <button @click="deleteNoteshandler(note.id)" class="action" type="button" title="Hapus">
         <svg stroke="currentColor" fill="currentColor"
           stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
           <path fill="none" d="M0 0h24v24H0V0z"></path>

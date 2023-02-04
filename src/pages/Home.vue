@@ -1,9 +1,8 @@
 <script setup>
-import { ref } from 'vue'
-import { getAllNotes } from '../utils/local-data'
+import { getActiveNotes } from '../utils/local-data'
 import { showFormattedDate } from '../utils'
 
-const allNotes = ref(getAllNotes())
+const allNotes = getActiveNotes()
 </script>
 
 <template>

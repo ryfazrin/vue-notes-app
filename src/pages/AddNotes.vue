@@ -9,9 +9,8 @@ const router = useRouter()
 const title = ref('')
 const body = ref('')
 
-function addNotesHandler() {
+function addNotesHandler () {
   addNote({ title, body })
-  
   router.back() // alternative: router.push('/')
 }
 </script>
