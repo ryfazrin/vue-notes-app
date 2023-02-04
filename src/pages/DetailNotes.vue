@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from 'vue';
 import { useRoute } from 'vue-router'
 import { showFormattedDate } from '../utils';
 import { getNote } from '../utils/local-data'
