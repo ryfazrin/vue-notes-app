@@ -5,7 +5,6 @@ import { register } from '../utils/network-data';
 
 const router = useRouter()
 
-//state posts
 const name = ref('')
 const email = ref('')
 const password = ref('')
@@ -44,6 +43,7 @@ async function registerHandler () {
       <button type="submit">Register</button>
     </form>
   </section>
+  <p>Sudah punya akun? <router-link to="/login">Login di sini</router-link></p>
 </template>
 
 <style scoped>

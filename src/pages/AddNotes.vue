@@ -1,6 +1,6 @@
 <script setup>
-import { ref, reactive } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { addNote } from '../utils/local-data';
 
 const router = useRouter()
