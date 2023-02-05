@@ -3,7 +3,7 @@ import Home from '../pages/Home.vue'
 import Archives from '../pages/Archives.vue'
 import DetailNotes from '../pages/DetailNotes.vue'
 import AddNotes from '../pages/AddNotes.vue'
-
+import Register from '../pages/Register.vue'
 const routes = [
   {
     path: '/',
@@ -24,6 +24,11 @@ const routes = [
     path: '/notes/new',
     name: 'Add Notes',
     component: AddNotes
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   }
 ]
 
