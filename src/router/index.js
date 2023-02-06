@@ -52,7 +52,9 @@ const routes = [
   }
 ]
 
-const router = createRouter({ history: createWebHistory(), routes })
+const BASE_URL = 'vue-notes-app'
+
+const router = createRouter({ history: createWebHistory(BASE_URL), routes })
 
 router.beforeEach(async (to, from, next) =>{
   const { error, data } = await getUserLogged()
