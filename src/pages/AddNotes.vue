@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { addNote } from '../utils/network-data';
-
-const router = useRouter()
+import { ref } from 'vue'
+import { addNote } from '../utils/network-data'
+import router from '../router'
 
 const title = ref('')
 const body = ref('')

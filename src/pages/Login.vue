@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { login, putAccessToken } from '../utils/network-data';
-
-const router = useRouter()
+import { ref } from 'vue'
+import router from '../router'
+import { login, putAccessToken } from '../utils/network-data'
 
 const email = ref('')
 const password = ref('')

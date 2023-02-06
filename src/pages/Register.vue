@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { register } from '../utils/network-data';
-
-const router = useRouter()
+import { ref } from 'vue'
+import router from '../router'
+import { register } from '../utils/network-data'
 
 const name = ref('')
 const email = ref('')

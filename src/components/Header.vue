@@ -1,9 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { createRouter } from 'vue-router';
 import { getUserLogged, putAccessToken } from '../utils/network-data'
-
-// const router = createRouter()
+import router from '../router'
 
 const name = ref('')
 const errorLogin = ref(true)
@@ -29,9 +27,8 @@ onMounted(async () => {
 function logoutHandler () {
   putAccessToken('')
   alert('Logout')
-  push('/login')
+  router.push('/login')
 }
-
 </script>
 
 <template>
