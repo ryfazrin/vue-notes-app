@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showFormattedDate } from '../utils'
-import { deleteNote, getNote } from '../utils/network-data'
+import { deleteNote, getNote, archiveNote, unarchiveNote } from '../utils/network-data'
 
 const route = useRoute()
 const router = useRouter()
@@ -15,17 +15,17 @@ onMounted(async () => {
 })
 
 async function deleteNoteshandler (id) {
-  // await deleteNote(id)
+  await deleteNote(id)
   router.push('/')
 }
 
-function archiveNotesHandler (id) {
-  // archiveNote(id)
+async function archiveNotesHandler (id) {
+  await archiveNote(id)
   router.push('/archive')
 }
 
-function unarchiveNotesHandler (id) {
-  // unarchiveNote(id)
+async function unarchiveNotesHandler (id) {
+  await unarchiveNote(id)
   router.push('/')
 }
 </script>
