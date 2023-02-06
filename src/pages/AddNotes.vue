@@ -1,17 +1,24 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { addNote } from '../utils/local-data';
+import { addNote } from '../utils/network-data';
 
 const router = useRouter()
 
-//state posts
 const title = ref('')
 const body = ref('')
 
-function addNotesHandler () {
-  addNote({ title, body })
-  router.back() // alternative: router.push('/')
+async function addNotesHandler () {
+  const { error } = await addNote({ 
+    title: title.value,
+    body: body.value
+  })
+
+  if (error) {
+    alert('Add notes FAIL')
+    return
+  }
+  router.back()
 }
 </script>
 
