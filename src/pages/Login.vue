@@ -18,7 +18,7 @@ async function loginHandler () {
     alert(error)
     return
   }
-  console.log(data.accessToken)
+
   putAccessToken(data.accessToken)
   router.push('/')
 }

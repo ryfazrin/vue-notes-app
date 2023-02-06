@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getUserLogged } from '../utils/network-data'
+import { createRouter } from 'vue-router';
+import { getUserLogged, putAccessToken } from '../utils/network-data'
+
+// const router = createRouter()
 
 const name = ref('')
 const errorLogin = ref(true)
@@ -8,9 +11,27 @@ const errorLogin = ref(true)
 onMounted(async () => {
   const { error, data } = await getUserLogged()
 
-  name.value = data.name
-  errorLogin.value = error
+  if (!error) {
+    name.value = data.name
+    errorLogin.value = error
+  }
 })
+// watch(errorLogin, async (newInfo, oldInfo) => {
+//   try {
+//     const { error, data } = await getUserLogged()
+//     errorLogin.value = error
+//     name.value = data.name
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
+
+function logoutHandler () {
+  putAccessToken('')
+  alert('Logout')
+  push('/login')
+}
+
 </script>
 
 <template>
@@ -21,7 +42,7 @@ onMounted(async () => {
         <li><router-link to="/archive">Arsip</router-link></li>
       </ul>
     </nav>
-    <button v-if="!errorLogin" class="button-logout" type="button">
+    <button v-if="!errorLogin" @click="logoutHandler" class="button-logout" type="button">
       <svg stroke="currentColor" fill="currentColor" stroke-width="0"
         viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
         <path fill="none" d="M0 0h24v24H0z"></path>

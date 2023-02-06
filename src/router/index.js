@@ -63,8 +63,6 @@ router.beforeEach(async (to, from, next) =>{
       router.push('/login')
     }
 
-    console.log(data)
-
     next()
   }
 
