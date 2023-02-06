@@ -1,8 +1,14 @@
 <script setup>
-import { getArchivedNotes } from '../utils/local-data'
+import { getArchivedNotes } from '../utils/network-data'
 import { showFormattedDate } from '../utils'
+import { ref, onMounted } from 'vue'
 
-const archivedNotes = getArchivedNotes()
+const archivedNotes = ref([])
+
+onMounted(async () => {
+  const res = await getArchivedNotes()
+  archivedNotes.value = await res.data
+})
 </script>
 
 <template>
