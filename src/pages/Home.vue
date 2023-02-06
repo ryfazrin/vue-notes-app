@@ -1,8 +1,14 @@
 <script setup>
-import { getActiveNotes } from '../utils/local-data'
+import { getActiveNotes } from '../utils/network-data'
 import { showFormattedDate } from '../utils'
+import { ref, onMounted } from 'vue';
 
-const allNotes = getActiveNotes()
+const allNotes = ref([])
+
+onMounted(async () => {
+  const res = await getActiveNotes()
+  allNotes.value = await res.data
+})
 </script>
 
 <template>
