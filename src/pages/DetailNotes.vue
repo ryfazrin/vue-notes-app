@@ -1,25 +1,31 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { showFormattedDate } from '../utils';
-import { archiveNote, deleteNote, getNote, unarchiveNote } from '../utils/local-data'
+import { showFormattedDate } from '../utils'
+import { deleteNote, getNote } from '../utils/network-data'
 
 const route = useRoute()
 const router = useRouter()
 
-const note = getNote(route.params.id)
+const note = ref({})
 
-function deleteNoteshandler (id) {
-  deleteNote(id)
+onMounted(async () => {
+  const res = await getNote(route.params.id)
+  note.value = res.data
+})
+
+async function deleteNoteshandler (id) {
+  // await deleteNote(id)
   router.push('/')
 }
 
 function archiveNotesHandler (id) {
-  archiveNote(id)
+  // archiveNote(id)
   router.push('/archive')
 }
 
 function unarchiveNotesHandler (id) {
-  unarchiveNote(id)
+  // unarchiveNote(id)
   router.push('/')
 }
 </script>
