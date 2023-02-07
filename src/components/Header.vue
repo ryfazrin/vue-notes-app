@@ -2,6 +2,10 @@
 import { ref, onMounted } from 'vue'
 import { getUserLogged, putAccessToken } from '../utils/network-data'
 import router from '../router'
+import useOnoff from '../store/onoff';
+
+const stateOnoff = useOnoff()
+const onoff = stateOnoff.onoff
 
 const name = ref('')
 const errorLogin = ref(true)
@@ -33,7 +37,7 @@ function logoutHandler () {
 
 <template>
   <header>
-    <h1><router-link to="/">Aplikasi Catatan</router-link></h1>
+    <h1><router-link to="/">{{onoff}} Aplikasi Catatan</router-link></h1>
     <nav class="navigation">
       <ul>
         <li><router-link to="/archive">Arsip</router-link></li>
