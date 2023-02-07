@@ -1,32 +1,14 @@
 import { computed, reactive, ref, toRefs } from "vue";
 
-// const state = reactive({
-//   onoff: 1
-// })
-
-// export default function useOnoff() {
-//   const onoff = state.onoff
-
-//   function increment() {
-//     state.onoff++
-//   }
-
-//   return {
-//     ...toRefs(onoff),
-//     onoff,
-//     increment
-//   }
-// }
-
-const state = ref({
-  onoff: 0,
+const state = reactive({
+  onoff: 1
 })
 
 export default function useOnoff() {
-  const onoff = computed(() => state.value.onoff)
+  const onoff = computed(() => state.onoff)
+
   function increment() {
-    state.value.onoff++
-    console.log(state.value.onoff)
+    state.onoff++
   }
 
   return {
@@ -35,3 +17,21 @@ export default function useOnoff() {
     increment
   }
 }
+
+// const state = ref({
+//   onoff: 0,
+// })
+
+// export default function useOnoff() {
+//   const onoff = computed(() => state.value.onoff)
+//   function increment() {
+//     state.value.onoff++
+//     console.log(state.value.onoff)
+//   }
+
+//   return {
+//     ...toRefs(onoff),
+//     onoff,
+//     increment
+//   }
+// }
