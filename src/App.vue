@@ -1,23 +1,14 @@
 <script setup>
 import Header from './components/Header.vue'
-import useOnoff from './store/onoff';
+import useTheme from './store/theme'
 
-const stateOnoff = useOnoff()
-
-const onoff = stateOnoff.onoff
-
-function incrementHandler () {
-  stateOnoff.increment()
-}
-
-console.log(stateOnoff.onoff)
+const storeTheme = useTheme()
+const themeDark = storeTheme.dark
 </script>
 
 <template>
-  <div class="app-container">
+  <div class="app-container" :data-theme="themeDark ? 'dark' : 'light'">
     <Header />
-    <p>{{ onoff }}</p>
-    <button @click="incrementHandler">Tambah</button>
     <main>
       <router-view></router-view>
     </main>
