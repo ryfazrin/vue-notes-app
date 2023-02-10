@@ -7,7 +7,7 @@ const themeDark = storeTheme.dark
 </script>
 
 <template>
-  <div class="app-container" :data-theme="themeDark ? 'dark' : 'light'">
+  <div class="app-container" :data-theme="themeDark? 'dark' : 'light'">
     <Header />
     <main>
       <router-view></router-view>
