@@ -1,7 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getUserLogged, putAccessToken } from '../utils/network-data'
-import router from '../router'
+import { ref } from 'vue'
 import { useUserStore } from '../store/user';
 
 const storeUser = useUserStore()
