@@ -1,45 +1,21 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getUserLogged, putAccessToken } from '../utils/network-data'
-import router from '../router'
+import { ref } from 'vue'
+import { useUserStore } from '../store/user';
 
-const name = ref('')
+const storeUser = useUserStore()
+
 const errorLogin = ref(true)
-
-onMounted(async () => {
-  const { error, data } = await getUserLogged()
-
-  if (!error) {
-    name.value = data.name
-    errorLogin.value = error
-  }
-})
-// watch(errorLogin, async (newInfo, oldInfo) => {
-//   try {
-//     const { error, data } = await getUserLogged()
-//     errorLogin.value = error
-//     name.value = data.name
-//   } catch (err) {
-//     console.log(err)
-//   }
-// })
-
-function logoutHandler () {
-  putAccessToken('')
-  alert('Logout')
-  router.push('/login')
-}
 </script>
 
 <template>
   <header>
-    <h1><router-link to="/">Aplikasi Catatan</router-link></h1>
-    <nav class="navigation">
+    <h1 @click="storeUser.increment"><router-link to="/">Aplikasi Catatan {{ storeUser.doubleCount }}</router-link></h1>
+    <nav v-if="storeUser.userLogged" class="navigation">
       <ul>
         <li><router-link to="/archive">Arsip</router-link></li>
       </ul>
     </nav>
-    <button v-if="!errorLogin" @click="logoutHandler" class="button-logout" type="button">
+    <button v-if="storeUser.userLogged" @click="storeUser.logout" class="button-logout" type="button">
       <svg stroke="currentColor" fill="currentColor" stroke-width="0"
         viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
         <path fill="none" d="M0 0h24v24H0z"></path>
@@ -47,7 +23,7 @@ function logoutHandler () {
           d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5a2 2 0 00-2 2v4h2V5h14v14H5v-4H3v4a2 2 0 002 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z">
         </path>
       </svg>
-      {{ name }}
+      {{ storeUser.userLogged }}
     </button>
   </header>
 </template>
