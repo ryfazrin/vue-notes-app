@@ -1,31 +1,34 @@
-import { computed, reactive, toRefs } from 'vue'
-import { getUserLogged } from '../utils/network-data'
+import { defineStore } from 'pinia'
+import { getUserLogged, putAccessToken } from '../utils/network-data'
+import router from '../router'
 
-const state = reactive({
-  userLogged: ''
+const useUserStore = defineStore({
+  id: 'userState',
+  state: () => ({
+    userLogged: localStorage.getItem('userLogged'),
+  }),
+  getters: {
+    getUser: (state) => state.userLogged
+  },
+  actions: {
+    async updatedUserLogged() {
+      const { data } = await getUserLogged()
+
+      // store userLogged in local storage to keep user logged in between page refreshes
+      localStorage.setItem('userLogged', data.name)
+
+      this.userLogged = data.name
+    },
+    logout() {
+      putAccessToken('')
+
+      localStorage.removeItem('userLogged')
+      this.userLogged = ''
+
+      alert('Logout')
+      router.push('/login')
+    }
+  }
 })
 
-function useUserLogged() {
-  async function fetchUser () {
-    const { error, data } = await getUserLogged()
-    return { error, data }
-  }
-
-  const userLogged = computed(async () => {
-    return state.userLogged = data.name
-  })
-
-  async function updatedUserLogged() {
-    const { data } = await fetchUser()
-
-    state.userLogged = data.name
-  }
-
-  return {
-    ...toRefs(userLogged),
-    userLogged,
-    updatedUserLogged
-  }
-}
-
-export default useUserLogged
+export { useUserStore }
