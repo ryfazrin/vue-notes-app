@@ -2,6 +2,9 @@
 import { ref } from 'vue'
 import router from '../router'
 import { login, putAccessToken } from '../utils/network-data'
+import { useUserStore } from '../store/user'
+
+const storeUser = useUserStore()
 
 const email = ref('')
 const password = ref('')
@@ -18,6 +21,7 @@ async function loginHandler () {
   }
 
   putAccessToken(data.accessToken)
+  await storeUser.updatedUserLogged()
   router.push('/')
 }
 </script>
